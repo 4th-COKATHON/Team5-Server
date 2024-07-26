@@ -9,7 +9,8 @@ const passport = require("passport");
 dotenv.config();
 const authRouter = require("./routes/auth");
 const friendRouter = require("./routes/friend");
-const bucketlistRouter = require('./routes/bucketlist');
+const bucketlistRouter = require("./routes/bucketlist");
+const diaryRouter = require("./routes/diary");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const Endpoints = require("./constant/endpoints");
@@ -47,8 +48,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRouter);
-app.use('/api', bucketlistRouter);
+app.use("/api", bucketlistRouter);
 app.use(Endpoints.FRIENDS, friendRouter);
+app.use(Endpoints.DIARIES, diaryRouter);
 
 app.use((req, res, next) => {
   res.status(404).json({

@@ -27,7 +27,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: false, // HTTPS에서만 쿠키를 전송합니다.
+      secure: true, // HTTPS에서만 쿠키를 전송합니다.
       sameSite: "none", // 다른 도메인에서도 쿠키를 전송할 수 있도록 합니다.
     },
   })

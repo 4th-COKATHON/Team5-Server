@@ -35,13 +35,7 @@ class Diary extends Sequelize.Model {
     );
   }
 
-  static associate(db) {
-    db.Diary.belongsTo(db.Bucketlist, {
-      foreignKey: "bucketlist_id",
-      targetKey: "id",
-    });
-    db.Diary.belongsTo(db.User, { foriegnKey: "user_id", targetKey: "id" });
-  }
-}
+    static associate(db) {}
+};
 
 module.exports = Diary;

@@ -23,9 +23,7 @@ class Bucketlist extends Sequelize.Model {
         });
     }
 
-    static associate(db) {
-        db.Bucketlist.belongsTo(db.User, { foreignKey: 'user_id', targetKey: 'id' });
-    }
+    static associate(db) {}
 };
 
 module.exports = Bucketlist;

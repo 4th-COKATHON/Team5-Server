@@ -3,27 +3,23 @@ const Sequelize = require('sequelize');
 class User extends Sequelize.Model {
     static initiate(sequelize) {
         User.init({
-            name: {
-                type: Sequelize.STRING(20),
+            nick: {
+                type: Sequelize.STRING(15),
                 allowNull: false,
                 unique: true,
             },
-            age: {
-                type: Sequelize.INTEGER.UNSIGNED,
+            password: {
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
-            married: {
-                type: Sequelize.BOOLEAN,
+            provider: {
+                type: Sequelize.ENUM('local', 'kakao'),
                 allowNull: false,
+                defaultValue: 'local',
             },
-            comment: {
-                type: Sequelize.TEXT,
+            snsId: {
+                type: Sequelize.STRING(30),
                 allowNull: true,
-            },
-            created_at: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW,
             },
         }, {
             sequelize,

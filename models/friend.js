@@ -7,18 +7,10 @@ class Friend extends Sequelize.Model {
         user_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          references: {
-            model: "Users", // References the 'Users' table
-            key: "id",
-          },
         },
         friend_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
-          references: {
-            model: "Users", // References the 'Users' table
-            key: "id",
-          },
         },
         status: {
           type: Sequelize.ENUM("pending", "accepted"),

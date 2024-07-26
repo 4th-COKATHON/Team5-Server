@@ -1,19 +1,20 @@
-exports.createFriend = async (req, res, next) => {
-  const { userId, friendId, status } = req.body;
-  try {
-    const exUser = await User.findOne({ where: { email } });
-    if (exUser) {
-      return res.redirect("/join?error=exist");
-    }
-    const hash = await bcrypt.hash(password, 12);
-    await User.create({
-      email,
-      nick,
-      password: hash,
-    });
-    return res.redirect("/");
-  } catch (error) {
-    console.error(error);
-    return next(error);
-  }
+const {
+  createFriend,
+  findFriendReqs,
+  findFriends,
+} = require("../services/friend");
+
+exports.createFriend = async (req, res) => {
+  result = await createFriend(req.body);
+  res.send(201, { friendId: result });
+};
+
+exports.findFriendReqs = async (req, res) => {
+  result = await findFriendReqs(req.query.id);
+  res.send(200, { reqList: result });
+};
+
+exports.findFriends = async (req, res) => {
+  result = await findFriends(req.query.id);
+  res.send(200, { friendList: result });
 };

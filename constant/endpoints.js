@@ -1,5 +1,5 @@
-const Endpoint = {
-  FRIENDS: "api/friends",
+const Endpoints = {
+  FRIENDS: "/api/friends",
 };
 
-export default Endpoint;
+module.exports = Endpoints;

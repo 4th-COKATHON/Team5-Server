@@ -1,31 +1,32 @@
-// const express = require("express");
-// const { default: Endpoint } = require("../constant/endpoints");
-// const { createFriend } = require("../controllers/friend");
-// const express = require("express");
-// const { default: Endpoint } = require("../constant/endpoints");
+const express = require("express");
+const {
+  createFriend,
+  findFriendReqs,
+  findFriends,
+} = require("../controllers/friend");
 
-// const router = express.Router();
+const router = express.Router();
 
-// // POST
-// // 친구 요청 발송
-// router.post("/", createFriend);
+// POST
+// 친구 요청 발송
+router.post("/", createFriend);
 
-// // GET
-// // 친구 요청 조회
-// router.get("/request");
+// GET
+// 친구 요청 조회
+router.get("/request", findFriendReqs);
 
-// // 친구 목록 조회
-// router.get("/");
+// 친구 목록 조회
+router.get("/", findFriends);
 
-// // 친구들의 버킷리스트 조회
-// router.get("/bucketlists");
+// 친구들의 버킷리스트 조회
+router.get("/bucketlists");
 
-// // PATCH
-// // 친구 요청 수락
-// router.patch("/");
+// PATCH
+// 친구 요청 수락
+router.patch("/");
 
-// // DELETE
-// // 친구 삭제
-// router.patch("/");
+// DELETE
+// 친구 삭제
+router.patch("/");
 
-// module.exports = router;
+module.exports = router;

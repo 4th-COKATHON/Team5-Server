@@ -8,7 +8,7 @@ const passport = require("passport");
 
 dotenv.config();
 const authRouter = require("./routes/auth");
-const freindRouter = require("./routes/friend");
+const friendRouter = require("./routes/friend");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const Endpoints = require("./constant/endpoints");
@@ -16,6 +16,7 @@ const Endpoints = require("./constant/endpoints");
 const app = express();
 passportConfig();
 app.set("port", process.env.PORT || 8001);
+
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -48,16 +49,16 @@ app.use("/auth", authRouter);
 app.use(Endpoints.FRIENDS, freindRouter);
 
 app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-  error.status = 404;
-  next(error);
+  res.status(404).json({
+    message: `${req.method} ${req.url} 라우터가 없습니다.`,
+  });
 });
 
 app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-  res.status(err.status || 500);
-  res.render("error");
+  res.status(err.status || 500).json({
+    message: err.message,
+    error: process.env.NODE_ENV !== "production" ? err : {},
+  });
 });
 
 app.listen(app.get("port"), () => {

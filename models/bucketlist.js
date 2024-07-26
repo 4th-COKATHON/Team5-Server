@@ -6,11 +6,7 @@ class Bucketlist extends Sequelize.Model {
             title: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
-            },
-            description: {
-                type: Sequelize.TEXT,
-                allowNull: false,
-            },
+            }
         }, {
             sequelize,
             timestamps: true,

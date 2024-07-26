@@ -26,7 +26,7 @@ router.get(
   }),
   (req, res) => {
     console.log(res.header);
-    res.redirect("/");
+    res.redirect("https://cotato-bucket.vercel.app/redirect");
   }
 );
 

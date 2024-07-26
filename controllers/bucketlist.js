@@ -49,3 +49,21 @@ exports.getBucketlistItems = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.deleteBucketlistItem = async (req, res, next) => {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    try {
+        const bucketlistItem = await Bucketlist.findOne({ where: { id, user_id: userId } });
+        if (!bucketlistItem) {
+            return res.status(404).json({ message: 'Bucketlist item not found' });
+        }
+
+        await bucketlistItem.destroy();
+        res.status(200).json({ message: 'Bucketlist item deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};

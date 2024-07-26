@@ -1,6 +1,6 @@
-const express = require("express");
-const { default: Endpoint } = require("../constant/endpoints");
-const { createFriend } = require("../controllers/friend");
+// const express = require("express");
+// const { default: Endpoint } = require("../constant/endpoints");
+// const { createFriend } = require("../controllers/friend");
 // const express = require("express");
 // const { default: Endpoint } = require("../constant/endpoints");
 

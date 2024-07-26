@@ -5,6 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const passport = require("passport");
+const cors = require("cors");
 
 dotenv.config();
 const authRouter = require("./routes/auth");
@@ -28,6 +29,7 @@ sequelize
     console.error("데이터베이스 연결 실패:", err);
   });
 
+app.use(cors());
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());

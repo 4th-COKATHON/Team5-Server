@@ -37,3 +37,15 @@ exports.updateBucketlistItem = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getBucketlistItems = async (req, res, next) => {
+    const userId = req.user.id;
+
+    try {
+        const bucketlistItems = await Bucketlist.findAll({ where: { user_id: userId } });
+        res.status(200).json({ message: 'Bucketlist items retrieved successfully', data: bucketlistItems });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};

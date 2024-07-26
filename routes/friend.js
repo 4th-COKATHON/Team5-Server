@@ -1,8 +1,10 @@
 const express = require("express");
 const { default: Endpoint } = require("../constant/endpoints");
 const { createFriend } = require("../controllers/friend");
+// const express = require("express");
+// const { default: Endpoint } = require("../constant/endpoints");
 
-const router = express.Router();
+// const router = express.Router();
 
 // // POST
 // // 친구 요청 발송

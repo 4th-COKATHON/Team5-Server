@@ -4,15 +4,14 @@ const User = require('../models/user');
 const e = require('express');
 
 exports.join = async (req, res, next) => {
-    const { email, nick, password } = req.body;
+    const { nick, password } = req.body;
     try {
-        const exUser = await User.findOne({ where: { email } });
+        const exUser = await User.findOne({ where: { nick } });
         if (exUser) {
             return res.redirect('/join?error=exist');
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
-            email,
             nick,
             password: hash,
         });

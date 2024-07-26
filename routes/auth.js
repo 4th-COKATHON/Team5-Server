@@ -22,7 +22,7 @@ router.get("/kakao", passport.authenticate("kakao"));
 router.get("/kakao/callback", passport.authenticate("kakao", {
     failureRedirect: "/?error=카카오 로그인 실패",
 }), (req, res) => {
-    res.redirect("/");
+    res.redirect("https://cotato-bucket.vercel.app/bucket");
 });
 
 module.exports = router;

@@ -7,32 +7,33 @@ const {
   rejectFriendReq,
   removeFriendship,
 } = require("../controllers/friend");
+const { isLoggedIn } = require("../middlewares");
 
 const router = express.Router();
 
 // POST
 // 친구 요청 발송
-router.post("/", createFriend);
+router.post("/", isLoggedIn, createFriend);
 
 // GET
 // 친구 목록 조회
-router.get("/", findFriends);
+router.get("/", isLoggedIn, findFriends);
 
 // 친구 요청 조회
-router.get("/request", findFriendReqs);
+router.get("/request", isLoggedIn, findFriendReqs);
 
 // 친구들의 버킷리스트 조회
-router.get("/bucketlists");
+router.get("/bucketlists", isLoggedIn);
 
 // PATCH
 // 친구 요청 수락
-router.patch("/:id", acceptFriendReq);
+router.patch("/:id", isLoggedIn, acceptFriendReq);
 
 // DELETE
 // 친구 삭제
-router.delete("/", removeFriendship);
+router.delete("/", isLoggedIn, removeFriendship);
 
 // 친구 요청 거부
-router.delete("/reject/:id", rejectFriendReq);
+router.delete("/reject/:id", isLoggedIn, rejectFriendReq);
 
 module.exports = router;

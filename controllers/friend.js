@@ -8,17 +8,17 @@ const {
 } = require("../services/friend");
 
 exports.createFriend = async (req, res) => {
-  result = await createFriend(req.body);
+  result = await createFriend(req.body.friendId, req.user.id);
   res.send(201, { friendId: result });
 };
 
 exports.findFriendReqs = async (req, res) => {
-  result = await findFriendReqs(req.query.id);
+  result = await findFriendReqs(req.user.id);
   res.send(200, { reqList: result });
 };
 
 exports.findFriends = async (req, res) => {
-  result = await findFriends(req.query.id);
+  result = await findFriends(req.user.id);
   res.send(200, { friendList: result });
 };
 

@@ -1,10 +1,10 @@
 const Diary = require("../models/diary");
 
-exports.createDiary = async (body) => {
+exports.createDiary = async (body, userId) => {
   result = await Diary.create({
     bucketlist_id: body.bucketlist_id,
     content: body.content,
-    user_id: body.user_id,
+    user_id: userId,
   });
   return result.id;
 };

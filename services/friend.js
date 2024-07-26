@@ -1,9 +1,8 @@
 const Friend = require("../models/friend");
 const User = require("../models/user");
-const Op = require("sequelize");
+const { Op } = require("sequelize");
 
-exports.createFriend = async (body) => {
-  const { userId, friendId } = body;
+exports.createFriend = async (friendId, userId) => {
   if (
     (await Friend.count({
       where: { user_id: userId, friend_id: friendId },
@@ -12,7 +11,7 @@ exports.createFriend = async (body) => {
     return;
 
   insertedId = (await Friend.create({ user_id: userId, friend_id: friendId }))
-    .dataValues.id;
+    .id;
 
   return insertedId;
 };
@@ -31,7 +30,7 @@ exports.findFriends = async (id) => {
   const friendIds = friends.map((friend) => friend.friend_id);
 
   const friendsInfo = await User.findAll({
-    where: { id: 1 },
+    where: { id: { [Op.in]: friendIds } },
     attributes: ["id", "nick"],
   });
   return friendsInfo;

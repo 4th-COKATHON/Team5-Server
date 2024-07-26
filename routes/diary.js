@@ -4,18 +4,19 @@ const {
   findDiaries,
   deleteDiary,
 } = require("../controllers/diary");
+const { isLoggedIn } = require("../middlewares");
 const router = express.Router();
 
 // POST
 // 일기 생성
-router.post("/", createDiary);
+router.post("/", isLoggedIn, createDiary);
 
 // GET
 // 일기 목록 조회
-router.get("/", findDiaries);
+router.get("/", isLoggedIn, findDiaries);
 
 // DELETE
 // 일기 삭제
-router.delete("/:id", deleteDiary);
+router.delete("/:id", isLoggedIn, deleteDiary);
 
 module.exports = router;

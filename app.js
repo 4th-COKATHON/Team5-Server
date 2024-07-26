@@ -20,6 +20,19 @@ const app = express();
 passportConfig();
 app.set("port", process.env.PORT || 8001);
 
+app.use(
+  session({
+    secret: "cookiesecret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false, // HTTPS에서만 쿠키를 전송합니다.
+      sameSite: "none", // 다른 도메인에서도 쿠키를 전송할 수 있도록 합니다.
+    },
+  })
+);
+
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -29,7 +42,7 @@ sequelize
     console.error("데이터베이스 연결 실패:", err);
   });
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());

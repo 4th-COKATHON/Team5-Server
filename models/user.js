@@ -12,6 +12,7 @@ class User extends Sequelize.Model {
         password: {
           type: Sequelize.STRING(100),
           allowNull: true,
+          defaultValue: "패스워드없음",
         },
         provider: {
           type: Sequelize.ENUM("local", "kakao"),

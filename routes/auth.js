@@ -25,7 +25,8 @@ router.get(
     failureRedirect: "/?error=카카오 로그인 실패",
   }),
   (req, res) => {
-    console.log(res.header);
+    console.log(req.session);
+    console.log(req.user);
     res.redirect("https://cotato-bucket.vercel.app/redirect");
   }
 );

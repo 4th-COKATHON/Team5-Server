@@ -3,6 +3,7 @@ const {
   createFriend,
   findFriendReqs,
   findFriends,
+  findBucketlistsOfFriends,
   rejectFriendReq,
   removeFriendship,
 } = require("../services/friend");
@@ -20,6 +21,11 @@ exports.findFriendReqs = async (req, res) => {
 exports.findFriends = async (req, res) => {
   result = await findFriends(req.user.id);
   res.send(200, { friendList: result });
+};
+
+exports.findBucketlistsOfFriends = async (req, res) => {
+  result = await findBucketlistsOfFriends(req.user.id);
+  res.send(200, { bucklistList: result });
 };
 
 exports.acceptFriendReq = async (req, res) => {

@@ -6,6 +6,7 @@ const {
   findFriends,
   rejectFriendReq,
   removeFriendship,
+  findBucketlistsOfFriends,
 } = require("../controllers/friend");
 const { isLoggedIn } = require("../middlewares");
 
@@ -23,7 +24,7 @@ router.get("/", isLoggedIn, findFriends);
 router.get("/request", isLoggedIn, findFriendReqs);
 
 // 친구들의 버킷리스트 조회
-router.get("/bucketlists", isLoggedIn);
+router.get("/bucketlists", isLoggedIn, findBucketlistsOfFriends);
 
 // PATCH
 // 친구 요청 수락

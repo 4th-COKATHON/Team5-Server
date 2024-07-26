@@ -1,3 +1,4 @@
+const Bucketlist = require("../models/bucketlist");
 const Friend = require("../models/friend");
 const User = require("../models/user");
 const { Op } = require("sequelize");
@@ -34,6 +35,20 @@ exports.findFriends = async (id) => {
     attributes: ["id", "nick"],
   });
   return friendsInfo;
+};
+
+exports.findBucketlistsOfFriends = async (id) => {
+  const friends = await Friend.findAll({
+    where: { user_id: id, status: "accepted" },
+    attributes: ["friend_id"],
+  });
+  const friendIds = friends.map((friend) => friend.friend_id);
+  console.log(friendIds);
+
+  const bucketlistList = await Bucketlist.findAll({
+    where: { user_id: { [Op.in]: friendIds } },
+  });
+  return bucketlistList;
 };
 
 exports.acceptFriendReq = async (id) => {

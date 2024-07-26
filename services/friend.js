@@ -43,7 +43,6 @@ exports.findBucketlistsOfFriends = async (id) => {
     attributes: ["friend_id"],
   });
   const friendIds = friends.map((friend) => friend.friend_id);
-  console.log(friendIds);
 
   const bucketlistList = await Bucketlist.findAll({
     where: { user_id: { [Op.in]: friendIds } },
